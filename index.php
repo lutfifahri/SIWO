@@ -1,0 +1,122 @@
+<?php
+date_default_timezone_set("Asia/Kuala_Lumpur");
+session_start();
+include_once('database/koneksi.php');
+include_once('utils/tanggal.php');
+
+if (isset($_SESSION['id'])) {
+    include_once('partials/header.php');
+    include_once('partials/navbar.php');
+    if ($_SESSION['level'] === 'ADMIN') include_once('partials/sidebar_admin.php');
+    else if ($_SESSION['level'] === 'KLIEN') include_once('partials/sidebar_klien.php');
+    if (isset($_GET['page'])) {
+        if ($_GET['page'] === 'konsep') include_once('master_data/konsep/tampil.php');
+        else if ($_GET['page'] === 'tambah_konsep') include_once('master_data/konsep/tambah.php');
+        else if ($_GET['page'] === 'edit_konsep') include_once('master_data/konsep/edit.php');
+        else if ($_GET['page'] === 'hapus_konsep') include_once('master_data/konsep/hapus.php');
+        else if ($_GET['page'] === 'detail_konsep') include_once('master_data/konsep/detail.php');
+        else if ($_GET['page'] === 'laporan_konsep') include_once('master_data/konsep/laporan.php');
+        else if ($_GET['page'] === 'talent') include_once('master_data/talent/tampil.php');
+        else if ($_GET['page'] === 'tambah_talent') include_once('master_data/talent/tambah.php');
+        else if ($_GET['page'] === 'edit_talent') include_once('master_data/talent/edit.php');
+        else if ($_GET['page'] === 'hapus_talent') include_once('master_data/talent/hapus.php');
+        else if ($_GET['page'] === 'detail_talent') include_once('master_data/talent/detail.php');
+        else if ($_GET['page'] === 'laporan_talent') include_once('master_data/talent/laporan.php');
+        else if ($_GET['page'] === 'jabatan') include_once('master_data/jabatan/tampil.php');
+        else if ($_GET['page'] === 'tambah_jabatan') include_once('master_data/jabatan/tambah.php');
+        else if ($_GET['page'] === 'edit_jabatan') include_once('master_data/jabatan/edit.php');
+        else if ($_GET['page'] === 'hapus_jabatan') include_once('master_data/jabatan/hapus.php');
+        else if ($_GET['page'] === 'equipment') include_once('master_data/equipment/tampil.php');
+        else if ($_GET['page'] === 'bank') include_once('master_data/bank/tampil.php');
+        else if ($_GET['page'] === 'produksi') include_once('master_data/produksi/tampil.php');
+        else if ($_GET['page'] === 'tambah_produksi') include_once('master_data/produksi/tambah.php');
+        else if ($_GET['page'] === 'edit_produksi') include_once('master_data/produksi/edit.php');
+        else if ($_GET['page'] === 'hapus_produksi') include_once('master_data/produksi/hapus.php');
+        else if ($_GET['page'] === 'detail_produksi') include_once('master_data/produksi/detail.php');
+        else if ($_GET['page'] === 'laporan_produksi') include_once('master_data/produksi/laporan.php');
+        else if ($_GET['page'] === 'tambah_equipment') include_once('master_data/equipment/tambah.php');
+        else if ($_GET['page'] === 'edit_equipment') include_once('master_data/equipment/edit.php');
+        else if ($_GET['page'] === 'hapus_equipment') include_once('master_data/equipment/hapus.php');
+        else if ($_GET['page'] === 'tambah_bank') include_once('master_data/bank/tambah.php');
+        else if ($_GET['page'] === 'edit_bank') include_once('master_data/bank/edit.php');
+        else if ($_GET['page'] === 'hapus_bank') include_once('master_data/bank/hapus.php');
+        else if ($_GET['page'] === 'detail_bank') include_once('master_data/bank/detail.php');
+        else if ($_GET['page'] === 'laporan_equipment') include_once('master_data/equipment/laporan.php');
+        else if ($_GET['page'] === 'pengajuan') include_once('pengajuan/tampil.php');
+        else if ($_GET['page'] === 'tambah_pengajuan') include_once('pengajuan/tambah.php');
+        else if ($_GET['page'] === 'edit_pengajuan') include_once('pengajuan/edit.php');
+        else if ($_GET['page'] === 'detail_pengajuan') include_once('pengajuan/detail.php');
+        else if ($_GET['page'] === 'hapus_pengajuan') include_once('pengajuan/hapus.php');
+        else if ($_GET['page'] === 'laporan_pengajuan') include_once('pengajuan/laporan.php');
+        else if ($_GET['page'] === 'tolak_pengajuan') include_once('pengajuan/tolak.php');
+        else if ($_GET['page'] === 'setujui_pengajuan') include_once('pengajuan/setujui.php');
+        else if ($_GET['page'] === 'anggaran') include_once('anggaran/tampil.php');
+        else if ($_GET['page'] === 'tambah_anggaran') include_once('anggaran/tambah.php');
+        else if ($_GET['page'] === 'edit_anggaran') include_once('anggaran/edit.php');
+        else if ($_GET['page'] === 'detail_anggaran') include_once('anggaran/detail.php');
+        else if ($_GET['page'] === 'hapus_anggaran') include_once('anggaran/hapus.php');
+        else if ($_GET['page'] === 'laporan_anggaran') include_once('anggaran/laporan.php');
+        else if ($_GET['page'] === 'pembayaran') include_once('pembayaran/tampil.php');
+        else if ($_GET['page'] === 'tambah_pembayaran') include_once('pembayaran/tambah.php');
+        else if ($_GET['page'] === 'edit_pembayaran') include_once('pembayaran/edit.php');
+        else if ($_GET['page'] === 'detail_pembayaran') include_once('pembayaran/detail.php');
+        else if ($_GET['page'] === 'hapus_pembayaran') include_once('pembayaran/hapus.php');
+        else if ($_GET['page'] === 'laporan_pembayaran') include_once('pembayaran/laporan.php');
+        else if ($_GET['page'] === 'jadwal_meeting') include_once('jadwal_meeting/tampil.php');
+        else if ($_GET['page'] === 'tambah_jadwal_meeting') include_once('jadwal_meeting/tambah.php');
+        else if ($_GET['page'] === 'edit_jadwal_meeting') include_once('jadwal_meeting/edit.php');
+        else if ($_GET['page'] === 'hapus_jadwal_meeting') include_once('jadwal_meeting/hapus.php');
+        else if ($_GET['page'] === 'klien') include_once('data_klien/tampil.php');
+        else if ($_GET['page'] === 'tambah_klien') include_once('data_klien/tambah.php');
+        else if ($_GET['page'] === 'edit_klien') include_once('data_klien/edit.php');
+        else if ($_GET['page'] === 'hapus_klien') include_once('data_klien/hapus.php');
+        else if ($_GET['page'] === 'laporan_klien') include_once('data_klien/laporan.php');
+        else if ($_GET['page'] === 'karyawan') include_once('data_karyawan/tampil.php');
+        else if ($_GET['page'] === 'tambah_karyawan') include_once('data_karyawan/tambah.php');
+        else if ($_GET['page'] === 'edit_karyawan') include_once('data_karyawan/edit.php');
+        else if ($_GET['page'] === 'hapus_karyawan') include_once('data_karyawan/hapus.php');
+        else if ($_GET['page'] === 'laporan_karyawan') include_once('data_karyawan/laporan.php');
+        else if ($_GET['page'] === 'caraousel') include_once('portfolio/home/caraousel/tampil.php');
+        else if ($_GET['page'] === 'tambah_caraousel') include_once('portfolio/home/caraousel/tambah.php');
+        else if ($_GET['page'] === 'edit_caraousel') include_once('portfolio/home/caraousel/edit.php');
+        else if ($_GET['page'] === 'hapus_caraousel') include_once('portfolio/home/caraousel/hapus.php');
+        else if ($_GET['page'] === 'paket_wedding') include_once('portfolio/home/paket_wedding/tampil.php');
+        else if ($_GET['page'] === 'tambah_paket_wedding') include_once('portfolio/home/paket_wedding/tambah.php');
+        else if ($_GET['page'] === 'edit_paket_wedding') include_once('portfolio/home/paket_wedding/edit.php');
+        else if ($_GET['page'] === 'hapus_paket_wedding') include_once('portfolio/home/paket_wedding/hapus.php');
+        else if ($_GET['page'] === 'hasil_kerja') include_once('portfolio/home/hasil_kerja/tampil.php');
+        else if ($_GET['page'] === 'tambah_hasil_kerja') include_once('portfolio/home/hasil_kerja/tambah.php');
+        else if ($_GET['page'] === 'edit_hasil_kerja') include_once('portfolio/home/hasil_kerja/edit.php');
+        else if ($_GET['page'] === 'hapus_hasil_kerja') include_once('portfolio/home/hasil_kerja/hapus.php');
+        else if ($_GET['page'] === 'profil') include_once('portfolio/home/profil/profil.php');
+        else if ($_GET['page'] === 'alasan_pengguna') include_once('portfolio/home/alasan_pengguna/alasan_pengguna.php');
+        else if ($_GET['page'] === 'kelebihan') include_once('portfolio/home/kelebihan/kelebihan.php');
+        else if ($_GET['page'] === 'profil_vendor') include_once('portfolio/vendor/profil_vendor/profil_vendor.php');
+        else if ($_GET['page'] === 'vendor_terbaik') include_once('portfolio/vendor/vendor_terbaik/vendor_terbaik.php');
+        else if ($_GET['page'] === 'profil_crew') include_once('portfolio/crew/profil_crew/profil_crew.php');
+        else if ($_GET['page'] === 'latihan') include_once('data_latihan/tampil.php');
+        else if ($_GET['page'] === 'tambah_latihan') include_once('data_latihan/tambah.php');
+        else if ($_GET['page'] === 'edit_latihan') include_once('data_latihan/edit.php');
+        else if ($_GET['page'] === 'hapus_latihan') include_once('data_latihan/hapus.php');
+        else if ($_GET['page'] === 'latihan_relasi') include_once('master_data/latihan/tampil.php');
+        else if ($_GET['page'] === 'tambah_latihan_relasi') include_once('master_data/latihan/tambah.php');
+        else if ($_GET['page'] === 'edit_latihan_relasi') include_once('master_data/latihan/edit.php');
+        else if ($_GET['page'] === 'hapus_latihan_relasi') include_once('master_data/latihan/hapus.php');
+        else include_once('dashboard.php');
+    } else include_once('dashboard.php');
+    include_once('partials/footer.php');
+} else {
+    if (isset($_GET['page'])) {
+        if ($_GET['page'] == 'register') {
+            include_once "halaman_auth/register.php";
+            exit;
+        } else if ($_GET['page'] == 'verif') {
+            include_once "halaman_auth/verif.php";
+            exit;
+        }
+        include_once "halaman_auth/login.php";
+        exit;
+    }
+    header('Location: portfolio.php');
+    exit;
+}
